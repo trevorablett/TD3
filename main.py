@@ -14,6 +14,8 @@ import DDPG
 from manipulator_learning.sim.envs.thing_reaching import ThingReachingXYState, ThingReachingXYImage
 from manipulator_learning.sim.envs.thing_pushing import ThingPushingXYState, ThingPushingXYImage
 
+from metaworld.envs.mujoco.sawyer_xyz import SawyerPegInsertionSideEnv
+
 # corrective interaction discriminator imports
 # from .discriminator_interaction.bc_pt import behavior_clone
 
@@ -23,6 +25,8 @@ from manipulator_learning.sim.envs.thing_pushing import ThingPushingXYState, Thi
 def eval_policy(policy, env_name, seed, eval_episodes=10):
 	if 'Thing' in env_name:  # todo add thing envs to actual gym list
 		eval_env = getattr(sys.modules[__name__], env_name)()
+	elif 'Sawyer' in args.env:
+		eval_env = getattr(sys.modules[__name__], args.env)(random_init=True)
 	else:
 		eval_env = gym.make(env_name)
 	eval_env.seed(seed + 100)
@@ -85,6 +89,9 @@ if __name__ == "__main__":
 
 	if 'Thing' in args.env:  # todo add thing envs to actual gym list
 		env = getattr(sys.modules[__name__], args.env)()
+	elif 'Sawyer' in args.env:
+		env = getattr(sys.modules[__name__], args.env)(random_init=True)
+		env._max_episode_steps = env.max_path_length
 	else:
 		env = gym.make(args.env)
 
