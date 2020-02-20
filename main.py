@@ -13,6 +13,7 @@ import DDPG
 
 from manipulator_learning.sim.envs.thing_reaching import ThingReachingXYState, ThingReachingXYImage
 from manipulator_learning.sim.envs.thing_pushing import ThingPushingXYState, ThingPushingXYImage
+from manipulator_learning.sim.envs.thing_pick_and_place import ThingPickAndPlaceXYState, ThingPickAndPlaceXYImage
 
 from metaworld.envs.mujoco.sawyer_xyz import SawyerPegInsertionSideEnv
 
